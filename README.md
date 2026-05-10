@@ -56,6 +56,26 @@ Endpoints disponibles desde esta parte:
 
 Tambien se retiro la ruta del Django Admin para que la gestion se realice por la API REST.
 
+## Parte 6: pruebas de la API
+
+Se agregaron pruebas con `APITestCase` para validar los endpoints principales.
+
+Las pruebas cubren:
+
+- Listado de productos con datos del proveedor.
+- Creacion de productos.
+- Actualizacion de productos.
+- Eliminacion de productos.
+- Busqueda de productos con `?search=`.
+- CRUD basico de proveedores.
+- Visualizacion de productos asociados a un proveedor.
+
+Para ejecutar las pruebas:
+
+```bash
+python manage.py test
+```
+
 ## Tecnologias usadas
 
 - Python
