@@ -26,6 +26,15 @@ Se agregaron los serializers de Django REST Framework:
 
 La respuesta de productos incluye `proveedor_nombre` y `proveedor_detalle` para que el JSON sea mas claro al probar en Postman.
 
+## Parte 4: vistas REST
+
+Se agregaron las vistas principales usando `ModelViewSet` de Django REST Framework:
+
+- `ProductoViewSet`: prepara el CRUD de productos y permite buscar por `nombre` o por el nombre del proveedor.
+- `ProveedorViewSet`: prepara el CRUD de proveedores y permite buscar por `nombre` o `correo_contacto`.
+
+Estas vistas usaran los serializers creados en la Parte 3. Las rutas se conectaran en la siguiente parte.
+
 ## Tecnologias usadas
 
 - Python
