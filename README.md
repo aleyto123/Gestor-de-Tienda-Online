@@ -35,6 +35,27 @@ Se agregaron las vistas principales usando `ModelViewSet` de Django REST Framewo
 
 Estas vistas usaran los serializers creados en la Parte 3. Las rutas se conectaran en la siguiente parte.
 
+## Parte 5: rutas de la API
+
+Se conectaron las rutas con `DefaultRouter` de Django REST Framework.
+
+Endpoints disponibles desde esta parte:
+
+- `GET /productos/`
+- `POST /productos/`
+- `GET /productos/{id}/`
+- `PUT /productos/{id}/`
+- `PATCH /productos/{id}/`
+- `DELETE /productos/{id}/`
+- `GET /proveedores/`
+- `POST /proveedores/`
+- `GET /proveedores/{id}/`
+- `PUT /proveedores/{id}/`
+- `PATCH /proveedores/{id}/`
+- `DELETE /proveedores/{id}/`
+
+Tambien se retiro la ruta del Django Admin para que la gestion se realice por la API REST.
+
 ## Tecnologias usadas
 
 - Python
