@@ -17,6 +17,15 @@ Se agregaron los modelos principales del sistema:
 
 Tambien se agrego la migracion inicial para crear las tablas `proveedores` y `productos`.
 
+## Parte 3: serializers
+
+Se agregaron los serializers de Django REST Framework:
+
+- `ProveedorSerializer`: muestra los datos del proveedor y sus productos asociados.
+- `ProductoSerializer`: muestra los datos del producto, el id del proveedor y datos adicionales del proveedor.
+
+La respuesta de productos incluye `proveedor_nombre` y `proveedor_detalle` para que el JSON sea mas claro al probar en Postman.
+
 ## Tecnologias usadas
 
 - Python
