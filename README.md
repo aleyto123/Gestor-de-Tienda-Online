@@ -2,79 +2,11 @@
 
 AUTOR: Bellido Chambi Rony Widmer
 
-API REST para un gestor de tienda online. El proyecto se desarrollara por partes usando Django y Django REST Framework.
+## Descripcion
 
-## Parte 1: estructura inicial
+Shopverse API es una API REST para administrar una tienda online. Permite gestionar productos y proveedores usando Django y Django REST Framework.
 
-En esta primera parte se creo la estructura base del proyecto `shopverse_api`.
-
-## Parte 2: modelos de datos
-
-Se agregaron los modelos principales del sistema:
-
-- `Proveedor`: guarda `nombre` y `correo_contacto`.
-- `Producto`: guarda `nombre`, `precio`, `stock` y su relacion con un `Proveedor`.
-
-Tambien se agrego la migracion inicial para crear las tablas `proveedores` y `productos`.
-
-## Parte 3: serializers
-
-Se agregaron los serializers de Django REST Framework:
-
-- `ProveedorSerializer`: muestra los datos del proveedor y sus productos asociados.
-- `ProductoSerializer`: muestra los datos del producto, el id del proveedor y datos adicionales del proveedor.
-
-La respuesta de productos incluye `proveedor_nombre` y `proveedor_detalle` para que el JSON sea mas claro al probar en Postman.
-
-## Parte 4: vistas REST
-
-Se agregaron las vistas principales usando `ModelViewSet` de Django REST Framework:
-
-- `ProductoViewSet`: prepara el CRUD de productos y permite buscar por `nombre` o por el nombre del proveedor.
-- `ProveedorViewSet`: prepara el CRUD de proveedores y permite buscar por `nombre` o `correo_contacto`.
-
-Estas vistas usaran los serializers creados en la Parte 3. Las rutas se conectaran en la siguiente parte.
-
-## Parte 5: rutas de la API
-
-Se conectaron las rutas con `DefaultRouter` de Django REST Framework.
-
-Endpoints disponibles desde esta parte:
-
-- `GET /productos/`
-- `POST /productos/`
-- `GET /productos/{id}/`
-- `PUT /productos/{id}/`
-- `PATCH /productos/{id}/`
-- `DELETE /productos/{id}/`
-- `GET /proveedores/`
-- `POST /proveedores/`
-- `GET /proveedores/{id}/`
-- `PUT /proveedores/{id}/`
-- `PATCH /proveedores/{id}/`
-- `DELETE /proveedores/{id}/`
-
-Tambien se retiro la ruta del Django Admin para que la gestion se realice por la API REST.
-
-## Parte 6: pruebas de la API
-
-Se agregaron pruebas con `APITestCase` para validar los endpoints principales.
-
-Las pruebas cubren:
-
-- Listado de productos con datos del proveedor.
-- Creacion de productos.
-- Actualizacion de productos.
-- Eliminacion de productos.
-- Busqueda de productos con `?search=`.
-- CRUD basico de proveedores.
-- Visualizacion de productos asociados a un proveedor.
-
-Para ejecutar las pruebas:
-
-```bash
-python manage.py test
-```
+Cada producto pertenece a un proveedor. La gestion se realiza mediante endpoints REST, sin usar Django Admin como interfaz de gestion.
 
 ## Tecnologias usadas
 
@@ -82,20 +14,182 @@ python manage.py test
 - Django
 - Django REST Framework
 - SQLite
+- Git y GitHub
 
-## Como ejecutar el proyecto
+## Historial de desarrollo por partes
 
-Primero entra a la carpeta del proyecto:
+| Parte | Avance |
+| --- | --- |
+| Parte 1 | Estructura inicial del proyecto `shopverse_api`. |
+| Parte 2 | Modelos `Producto` y `Proveedor`, con migracion inicial. |
+| Parte 3 | Serializers para productos y proveedores. |
+| Parte 4 | Vistas REST con `ModelViewSet`. |
+| Parte 5 | Rutas de la API con `DefaultRouter`. |
+| Parte 6 | Pruebas de endpoints con `APITestCase`. |
+| Parte 7 | Documentacion final del README. |
+
+## Instrucciones para ejecutar el servidor
+
+Clonar el repositorio:
 
 ```bash
-cd shopverse_api
+git clone https://github.com/aleyto123/Gestor-de-Tienda-Online.git
+cd Gestor-de-Tienda-Online/shopverse_api
 ```
 
-Luego instala las dependencias y ejecuta el servidor cuando el entorno virtual este preparado:
+Crear y activar el entorno virtual:
+
+```bash
+python3 -m venv venv
+.\venv\Scripts\activate
+```
+
+Si tu instalacion de Python usa el comando `python` en lugar de `python3`, puedes reemplazar `python3` por `python` en los comandos.
+
+Instalar dependencias:
 
 ```bash
 pip install -r requirements.txt
-python manage.py runserver
 ```
 
-Los endpoints se agregaran en las siguientes partes del desarrollo.
+Ejecutar migraciones:
+
+```bash
+python3 manage.py migrate
+```
+
+Iniciar el servidor:
+
+```bash
+python3 manage.py runserver
+```
+
+La API estara disponible en:
+
+```text
+http://127.0.0.1:8000/
+```
+
+## Ejecutar pruebas
+
+Desde la carpeta `shopverse_api`:
+
+```bash
+python3 manage.py test
+```
+
+## Endpoints disponibles
+
+### Productos
+
+| Accion | Metodo | Endpoint |
+| --- | --- | --- |
+| Listar productos | GET | `/productos/` |
+| Crear producto | POST | `/productos/` |
+| Ver producto | GET | `/productos/{id}/` |
+| Actualizar producto completo | PUT | `/productos/{id}/` |
+| Actualizar producto parcial | PATCH | `/productos/{id}/` |
+| Eliminar producto | DELETE | `/productos/{id}/` |
+| Buscar producto | GET | `/productos/?search=texto` |
+
+### Proveedores
+
+| Accion | Metodo | Endpoint |
+| --- | --- | --- |
+| Listar proveedores | GET | `/proveedores/` |
+| Crear proveedor | POST | `/proveedores/` |
+| Ver proveedor | GET | `/proveedores/{id}/` |
+| Actualizar proveedor completo | PUT | `/proveedores/{id}/` |
+| Actualizar proveedor parcial | PATCH | `/proveedores/{id}/` |
+| Eliminar proveedor | DELETE | `/proveedores/{id}/` |
+| Buscar proveedor | GET | `/proveedores/?search=texto` |
+
+## Ejemplos de uso con curl
+
+Crear proveedor:
+
+```bash
+curl -X POST http://127.0.0.1:8000/proveedores/ -H "Content-Type: application/json" -d "{\"nombre\":\"Distribuidora Lima\",\"correo_contacto\":\"ventas@lima.pe\"}"
+```
+
+Listar proveedores:
+
+```bash
+curl http://127.0.0.1:8000/proveedores/
+```
+
+Crear producto:
+
+```bash
+curl -X POST http://127.0.0.1:8000/productos/ -H "Content-Type: application/json" -d "{\"nombre\":\"Laptop Lenovo\",\"precio\":\"2500.00\",\"stock\":8,\"proveedor\":1}"
+```
+
+Listar productos:
+
+```bash
+curl http://127.0.0.1:8000/productos/
+```
+
+Buscar producto:
+
+```bash
+curl "http://127.0.0.1:8000/productos/?search=laptop"
+```
+
+Actualizar producto:
+
+```bash
+curl -X PATCH http://127.0.0.1:8000/productos/1/ -H "Content-Type: application/json" -d "{\"stock\":12}"
+```
+
+Eliminar producto:
+
+```bash
+curl -X DELETE http://127.0.0.1:8000/productos/1/
+```
+
+## Ejemplo de respuesta personalizada
+
+Al listar productos, la respuesta incluye informacion del proveedor asociado:
+
+```json
+{
+  "id": 1,
+  "nombre": "Laptop Lenovo",
+  "precio": "2500.00",
+  "stock": 8,
+  "proveedor": 1,
+  "proveedor_nombre": "Distribuidora Lima",
+  "proveedor_detalle": {
+    "id": 1,
+    "nombre": "Distribuidora Lima",
+    "correo_contacto": "ventas@lima.pe"
+  },
+  "creado_en": "2026-05-09T20:00:00-05:00",
+  "actualizado_en": "2026-05-09T20:00:00-05:00"
+}
+```
+
+## Notas para Postman
+
+Antes de crear un producto, primero se debe crear un proveedor. Luego se usa el `id` del proveedor en el campo `proveedor`.
+
+Campos para crear proveedor:
+
+```json
+{
+  "nombre": "Distribuidora Lima",
+  "correo_contacto": "ventas@lima.pe"
+}
+```
+
+Campos para crear producto:
+
+```json
+{
+  "nombre": "Laptop Lenovo",
+  "precio": "2500.00",
+  "stock": 8,
+  "proveedor": 1
+}
+```
